@@ -76,7 +76,7 @@ h1 {
   text-align: center;
 }
 
-input[type="range"] {
+[type="range"] {
   width: 300px;
   margin: 0 auto;
   display: block;
@@ -108,12 +108,21 @@ input[type="range"] {
 }
 
 #emojiTable button {
-  padding: 10px 20px !important;
-  background-color: #ffd700 !important;
-  color: #000 !important;
-  border: none !important;
-  border-radius: 5px !important;
-  cursor: pointer !important;
+  padding: 15px 30px; /* Mettre le même padding que le bouton "réinitialiser" */
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffd700;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#emojiTable button:hover {
+  transform: scale(1.05); /* Effet de survol identique */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 #emojiTable button:hover {
