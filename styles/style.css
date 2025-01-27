@@ -89,10 +89,10 @@ input[type="range"] {
 }
 
 .emoji-customization table {
-  background-color: #ffffff;
   margin: 0 auto;
   border-collapse: collapse;
   width: 80%;
+  background-color: #ffffff;
 }
 
 .emoji-customization table th, .emoji-customization table td {
