@@ -39,6 +39,49 @@ h1 {
   margin-bottom: 20px; /* Réduction de l'espace sous la vague pour la rapprocher du titre */
 }
 
+/* Section des boutons d'action */
+.actions {
+  margin-top: 20px;
+}
+
+.actions button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffd700;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.actions button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Curseurs pour ajuster les tailles */
+.slider-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.slider-label {
+  display: block;
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+input[type="range"] {
+  width: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
 /* Table de personnalisation des émojis */
 #emojiTable {
   margin: 20px auto;
@@ -60,37 +103,21 @@ h1 {
   color: #000 !important;
 }
 
-/* Masquer les textes "Aucun fichier choisi" */
-#emojiTable td span {
-  display: none; /* Cache le texte "Aucun fichier choisi" */
-}
-
-/* Style du bouton "Choisir un fichier" pour qu'il ressemble au bouton "Réinitialiser" */
 #emojiTable input[type="file"] {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ffd700; /* Jaune */
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
+  padding: 5px !important;
 }
 
-#emojiTable input[type="file"]:hover {
-  background-color: #e6c200;
-}
-
-/* Masquer le bouton "Réinitialiser" */
 #emojiTable button {
-  display: none; /* Masque tous les boutons de type "Réinitialiser" */
+  padding: 10px 20px !important;
+  background-color: #ffd700 !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
 }
 
-/* Cacher l'input de type "file" dans la table */
-#emojiTable input[type="file"] {
-  display: inline-block; /* Affiche uniquement le bouton "Choisir un fichier" */
+#emojiTable button:hover {
+  background-color: #e6c200 !important;
 }
 
 /* Grille des cartes */
@@ -224,4 +251,27 @@ footer p {
 
 #menu-toggle:checked + .menu-icon + .menu-items {
   display: block;
+}
+
+/* Style pour le bouton "Choisir un fichier" */
+#emojiTable input[type="file"] {
+  display: none; /* Cacher l'élément input type="file" */
+}
+
+#emojiTable button {
+  background-color: #ffd700 !important; /* Mettre le bouton "Choisir un fichier" en jaune */
+  color: #000 !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+}
+
+#emojiTable button:hover {
+  background-color: #e6c200 !important;
+}
+
+/* Masquer les textes "Aucun fichier choisi" */
+#emojiTable td span {
+  display: none;
 }
