@@ -105,7 +105,6 @@ input[type="range"] {
 
 #emojiTable input[type="file"] {
   padding: 5px !important;
-  display: none;
 }
 
 #emojiTable button {
