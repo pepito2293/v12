@@ -1,6 +1,6 @@
 /* Styles globaux pour la page */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Calibri', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #c4e9fc; /* Fond bleu clair */
@@ -31,7 +31,7 @@ h1 {
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0px 0px 0px #000000;
-  margin-top: 15px;
+  margin-top: 20px;
   text-align: center;
 }
 
