@@ -89,6 +89,7 @@ input[type="range"] {
 }
 
 .emoji-customization table {
+  background-color: #ffffff;
   margin: 0 auto;
   border-collapse: collapse;
   width: 80%;
@@ -126,6 +127,7 @@ input[type="range"] {
 .emoji-customization button:hover {
   background-color: #e6c200;
 }
+
 
 /* Grille des cartes */
 .card-container-wrapper {
