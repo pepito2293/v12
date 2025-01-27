@@ -27,7 +27,7 @@ body.dark-mode {
 
 /* Style du titre principal */
 h1 {
-  font-size: 2.5rem;
+  font-size: arial;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 2px 2px 0px #000000;
