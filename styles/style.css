@@ -255,7 +255,6 @@ footer p {
 
 /* Style pour le bouton "Choisir un fichier" */
 #emojiTable input[type="file"] {
-  display: none; /* Cacher l'élément input type="file" */
 }
 
 #emojiTable button {
