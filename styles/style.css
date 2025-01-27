@@ -252,3 +252,13 @@ footer p {
 #menu-toggle:checked + .menu-icon + .menu-items {
   display: block;
 }
+
+/* Masquer les éléments indésirables */
+#emojiTable input[type="file"],
+#emojiTable button {
+  display: none; /* Cache les boutons et champs de fichier */
+}
+
+#emojiTable span {
+  display: none; /* Cache les textes comme "Aucun fichier choisi" */
+}
