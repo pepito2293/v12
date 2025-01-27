@@ -103,7 +103,7 @@ input[type="range"] {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
-  background-color: #ffffff; /* Fond blanc pour chaque cellule */
+  background-color: #ffffff !important; /* Fond blanc pour chaque cellule */
 }
 
 .emoji-customization table th {
@@ -267,59 +267,4 @@ footer p {
   display: block;
 }
 
-/* Table de personnalisation */
-#emojiTable {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 90%;
-  text-align: center;
-}
 
-#emojiTable th,
-#emojiTable td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-#emojiTable th {
-  background-color: #ffd700;
-  color: #000;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #ffd700;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #e6c200;
-}
-
-/* Masque complètement le champ input */
-input[type="file"] {
-  display: none;
-}
-
-/* Style du bouton personnalisé */
-.custom-file-upload {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #ffd700;
-  color: #000;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-/* Effet de survol */
-.custom-file-upload:hover {
-  background-color: #e6c200;
-}
