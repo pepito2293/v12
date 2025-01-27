@@ -1,20 +1,20 @@
 /* --- Styles globaux pour la page --- */
 body {
-  font-family: 'Poppins', sans-serif; /* Définition de la police de caractère globale */
+  font-family: 'Poppins', sans-serif; /* Police de caractère globale */
   margin: 0; /* Supprime les marges par défaut */
-  padding: 0; /* Supprime les espaces internes par défaut */
-  background-color: #c4e7fd; /* Définit un fond bleu clair pour toute la page */
+  padding: 0; /* Supprime les espacements par défaut */
+  background-color: #c4e7fd; /* Fond bleu clair */
   display: flex; /* Utilisation de Flexbox pour la mise en page */
-  flex-direction: column; /* Organise les éléments en colonne */
-  align-items: center; /* Centre horizontalement tous les éléments enfants */
-  min-height: 100vh; /* Assure que la page prend toute la hauteur de la fenêtre */
+  flex-direction: column; /* Les éléments sont disposés en colonne */
+  align-items: center; /* Aligne les éléments horizontalement au centre */
+  min-height: 100vh; /* La page prend toute la hauteur de la fenêtre */
 }
 
 /* --- Style du logo --- */
 .logo {
-  position: absolute; /* Positionnement absolu par rapport à son conteneur parent */
-  top: 20px; /* Positionne le logo à 20px du haut */
-  left: 20px; /* Positionne le logo à 20px de la gauche */
+  position: absolute; /* Positionnement absolu pour le logo */
+  top: 20px; /* Espacement de 20px du haut */
+  left: 20px; /* Espacement de 20px de la gauche */
   width: 100px; /* Largeur du logo */
   height: 100px; /* Hauteur du logo */
 }
@@ -23,230 +23,67 @@ body {
 h1 {
   font-size: 40px; /* Taille de la police du titre */
   font-weight: bold; /* Met le titre en gras */
-  color: #000000; /* Définit la couleur du texte en noir */
+  color: #000000; /* Couleur du texte du titre (noir) */
   text-shadow: 0px 0px 0px #000000; /* Pas d'ombre pour le texte */
   margin-top: 20px; /* Ajoute un espace de 20px au-dessus du titre */
-  text-align: center; /* Centre le titre horizontalement */
+  text-align: center; /* Centre le titre */
 }
 
 /* --- Vague décorative sous le titre --- */
 .wave {
   background-color: #ffd700; /* Fond jaune pour la vague */
   height: 30px; /* Hauteur de la vague */
-  width: 100%; /* La vague prend toute la largeur de la fenêtre */
-  border-radius: 50% 50% 0 0; /* Crée des bords arrondis pour une forme de vague */
-  transform: rotate(180deg); /* Fait pivoter la vague de 180 degrés pour l'inverser */
-  margin-bottom: 20px; /* Réduit l'espace sous la vague pour la rapprocher du titre */
-}
-
-/* --- Section des boutons d'action --- */
-.actions {
-  margin-top: 20px; /* Espace de 20px au-dessus des boutons */
-}
-
-.actions button {
-  padding: 15px 30px; /* Ajoute de l'espace à l'intérieur du bouton */
-  font-size: 18px; /* Taille du texte dans le bouton */
-  font-weight: bold; /* Met le texte en gras */
-  border: none; /* Supprime les bordures par défaut */
-  border-radius: 5px; /* Bords arrondis pour le bouton */
-  background-color: #ffd700; /* Fond jaune pour le bouton */
-  color: #000000; /* Texte noir dans le bouton */
-  cursor: pointer; /* Change le curseur en pointeur pour indiquer que c'est cliquable */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère autour du bouton */
-  transition: transform 0.2s, box-shadow 0.2s; /* Ajoute une transition pour les transformations et ombres */
-}
-
-.actions button:hover {
-  transform: scale(1.05); /* Agrandit légèrement le bouton au survol */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Ajoute une ombre plus grande au survol */
-}
-
-/* --- Curseur pour ajuster les tailles --- */
-.slider-container {
-  margin: 20px 0; /* Espace autour du curseur */
-  width: 100%; /* Prend toute la largeur disponible */
-}
-
-.slider-label {
-  display: block; /* Affiche le label sous forme de bloc */
-  font-size: 1rem; /* Taille de la police du label */
-  color: #000; /* Couleur noire pour le texte du label */
-  margin-bottom: 10px; /* Espace sous le label */
-  text-align: center; /* Centre le texte */
-}
-
-input[type="range"] {
-  width: 300px; /* Largeur du curseur */
-  margin: 0 auto; /* Centre le curseur horizontalement */
-  display: block; /* Affiche le curseur comme un bloc */
+  width: 100%; /* Largeur de la vague qui s'étend sur toute la page */
+  border-radius: 50% 50% 0 0; /* Bords arrondis en haut */
+  transform: rotate(180deg); /* Inverse la vague */
+  margin-bottom: 20px; /* Espace sous la vague pour la rapprocher du titre */
 }
 
 /* --- Table de personnalisation des émojis --- */
 #emojiTable {
-  margin: 20px auto; /* Espace de 20px en haut et centrage horizontal du tableau */
+  margin: 20px auto; /* Espacement autour du tableau */
   border-collapse: collapse; /* Fusionne les bordures du tableau */
-  width: 90%; /* Le tableau prend 90% de la largeur de la page */
+  width: 90%; /* Largeur du tableau */
   background-color: #ffffff !important; /* Fond blanc pour le tableau */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Ajoute une ombre autour du tableau */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Ombre légère autour du tableau */
 }
 
 #emojiTable th, #emojiTable td {
   border: 1px solid #ddd !important; /* Bordure grise autour des cellules */
-  padding: 12px 15px !important; /* Espace à l'intérieur des cellules */
-  text-align: center !important; /* Centre le texte dans les cellules */
-  background-color: #ffffff !important; /* Fond blanc pour les cellules */
+  padding: 12px 15px !important; /* Espacement intérieur des cellules */
+  text-align: center !important; /* Centrage du texte dans les cellules */
+  background-color: #ffffff !important; /* Fond blanc pour chaque cellule */
 }
 
 #emojiTable th {
-  background-color: #ffd700 !important; /* Fond jaune pour les en-têtes de colonnes */
-  color: #000 !important; /* Texte noir pour les en-têtes */
+  background-color: #ffd700 !important; /* Fond jaune pour les en-têtes */
+  color: #000 !important; /* Couleur du texte des en-têtes (noir) */
 }
 
+/* --- Style du bouton "Choisir un fichier" --- */
 #emojiTable input[type="file"] {
-  padding: 5px !important; /* Ajoute de l'espace autour du bouton de fichier */
+  display: inline-block; /* Affiche le champ de type file */
+  padding: 10px 20px; /* Espacement intérieur du bouton */
+  font-size: 16px; /* Taille de la police du texte */
+  background-color: #ffd700; /* Fond jaune pour le bouton */
+  color: #000; /* Couleur du texte du bouton (noir) */
+  border: none; /* Pas de bordure pour le bouton */
+  border-radius: 5px; /* Bords arrondis pour le bouton */
+  cursor: pointer; /* Curseur en forme de main pour indiquer que c'est cliquable */
+  font-weight: bold; /* Texte en gras */
+  text-align: center; /* Centrer le texte dans le bouton */
 }
 
-#emojiTable button {
-  padding: 10px 20px !important; /* Espace à l'intérieur du bouton */
-  background-color: #ffd700 !important; /* Fond jaune pour le bouton */
-  color: #000 !important; /* Texte noir pour le bouton */
-  border: none !important; /* Pas de bordure pour le bouton */
-  border-radius: 5px !important; /* Bords arrondis pour le bouton */
-  cursor: pointer !important; /* Change le curseur en pointeur */
-}
-
-#emojiTable button:hover {
-  background-color: #e6c200 !important; /* Fond jaune plus foncé au survol */
-}
-
-/* --- Grille des cartes --- */
-.card-container-wrapper {
-  display: flex; /* Utilise Flexbox pour organiser les éléments */
-  flex-direction: column; /* Organise les éléments en colonne */
-  align-items: center; /* Centre les éléments horizontalement */
-  margin-top: 30px; /* Espace au-dessus des cartes */
-}
-
-.card-container {
-  display: grid; /* Utilise une grille pour organiser les cartes */
-  grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
-  gap: 25px; /* Espace de 25px entre chaque carte */
-  justify-content: center; /* Centre les cartes dans la grille */
-}
-
-/* --- Style des cartes --- */
-.card {
-  width: 250px; /* Largeur de chaque carte */
-  height: 250px; /* Hauteur de chaque carte */
-  border: 3px solid #000000; /* Bordure noire autour de chaque carte */
-  background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Fond dégradé pour les cartes */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Ombre autour des cartes */
-  position: relative; /* Positionnement relatif pour les éléments enfants */
-}
-
-/* --- Style des émojis ou images dans les cartes --- */
-.symbol {
-  position: absolute; /* Positionnement absolu pour centrer l'émoji */
-  display: flex; /* Utilisation de Flexbox pour centrer l'émoji */
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-  text-align: center; /* Centre le texte */
-  cursor: pointer; /* Change le curseur en pointeur */
-  user-select: none; /* Empêche la sélection du texte */
-  transition: transform 0.1s ease; /* Transition pour un effet de transformation au survol */
-  border: none; /* Pas de bordure pour l'émoji */
-  background: none; /* Pas de fond pour l'émoji */
-  border-radius: 0; /* Pas de bordures arrondies */
-}
-
-.symbol img {
-  max-width: 100%; /* L'image prend toute la largeur disponible */
-  max-height: 100%; /* L'image prend toute la hauteur disponible */
-  display: block; /* Affiche l'image sous forme de bloc */
-}
-
-/* --- Contrôle de taille d'émoji --- */
-.size-control {
-  display: none; /* Masque le contrôle de la taille d'émoji */
-  position: fixed; /* Position fixe en bas de la fenêtre */
-  bottom: 20px; /* Espacement de 20px depuis le bas */
-  left: 50%; /* Centre horizontalement */
-  transform: translateX(-50%); /* Centrage exact */
-  background-color: rgba(255, 255, 255, 0.9); /* Fond blanc semi-transparent */
-  padding: 15px; /* Espace autour des éléments */
-  border: 1px solid #ccc; /* Bordure grise */
-  border-radius: 8px; /* Bords arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre autour du contrôle */
-  display: flex; /* Flexbox pour l'alignement des éléments */
-  align-items: center; /* Centre les éléments verticalement */
-  gap: 10px; /* Espacement entre les éléments */
-}
-
-.size-control label {
-  font-size: 1rem; /* Taille de la police du label */
-  color: #000; /* Couleur noire pour le texte */
-}
-
-.size-control input {
-  width: 150px; /* Largeur du champ de saisie pour le contrôle de taille */
-}
-
-/* --- Pied de page --- */
-footer {
-  margin-top: 20px; /* Espace au-dessus du pied de page */
-  text-align: center; /* Centre le texte du pied de page */
-  color: #000; /* Texte noir */
-}
-
-footer p {
-  margin: 10px 0; /* Espacement autour du texte dans le pied de page */
-}
-
-/* --- Menu hamburger --- */
-.hamburger-menu {
-  position: absolute; /* Positionnement absolu pour le menu */
-  top: 20px; /* Espacement du haut */
-  right: 20px; /* Espacement de la droite */
-}
-
-#menu-toggle {
-  display: none; /* Masque le checkbox utilisé pour activer le menu */
-}
-
-.menu-icon {
-  font-size: 2rem; /* Taille de l'icône du menu */
-  cursor: pointer; /* Change le curseur en pointeur pour l'icône */
-}
-
-.menu-items {
-  display: none; /* Masque les éléments du menu par défaut */
-  list-style: none; /* Retire les puces des éléments de la liste */
-  margin: 0; /* Enlève les marges par défaut */
-  padding: 0; /* Enlève les paddings par défaut */
-  background-color: #ffd700; /* Fond jaune pour le menu */
-  position: absolute; /* Positionnement absolu pour le menu */
-  top: 50px; /* Espacement du menu par rapport à l'icône */
-  right: 0; /* Aligne le menu à droite */
-  width: 200px; /* Largeur du menu */
-  border-radius: 5px; /* Bords arrondis pour le menu */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombre autour du menu */
-}
-
-.menu-items li {
-  padding: 10px; /* Espacement dans les éléments du menu */
-}
-
-.menu-items li a {
-  text-decoration: none; /* Retire la décoration par défaut des liens */
-  color: #000; /* Texte noir pour les liens */
-  display: block; /* Affiche chaque lien en bloc */
-}
-
-.menu-items li:hover {
+#emojiTable input[type="file"]:hover {
   background-color: #e6c200; /* Fond jaune plus foncé au survol */
 }
 
-#menu-toggle:checked + .menu-icon + .menu-items {
-  display: block; /* Affiche le menu lorsque le checkbox est coché */
+/* --- Masquer le texte "Aucun fichier choisi" --- */
+#emojiTable td span {
+  display: none; /* Cache le texte "Aucun fichier choisi" */
+}
+
+/* --- Masquer le bouton "Réinitialiser" --- */
+#emojiTable button {
+  display: none; /* Cache le bouton "Réinitialiser" */
 }
