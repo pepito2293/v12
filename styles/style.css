@@ -133,7 +133,6 @@ input[type="range"] {
   background-color: #e6c200;
 }
 
-
 /* Grille des cartes */
 .card-container-wrapper {
   display: flex;
@@ -266,5 +265,3 @@ footer p {
 #menu-toggle:checked + .menu-icon + .menu-items {
   display: block;
 }
-
-
