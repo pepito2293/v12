@@ -105,6 +105,7 @@ input[type="range"] {
 
 #emojiTable input[type="file"] {
   padding: 5px !important;
+  display: none;
 }
 
 #emojiTable button {
@@ -253,12 +254,4 @@ footer p {
   display: block;
 }
 
-/* Masquer les éléments indésirables */
-#emojiTable input[type="file"],
-#emojiTable button {
-  display: none; /* Cache les boutons et champs de fichier */
-}
 
-#emojiTable span {
-  display: none; /* Cache les textes comme "Aucun fichier choisi" */
-}
