@@ -83,55 +83,48 @@ input[type="range"] {
 }
 
 /* Table de personnalisation des émojis */
-.emoji-customization {
-  margin-top: 30px;
-  text-align: center;
-  display: flex;
-  justify-content: flex-end; /* Aligner le tableau à droite */
-  width: 100%; /* Pour prendre toute la largeur disponible */
-}
-
-.emoji-customization table {
+#emojiTable {
   margin: 0;
   border-collapse: collapse;
   width: 80%;
-  background-color: #ffffff !important; /* Fond blanc pour le tableau, avec priorité */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff !important; /* Fond blanc pour le tableau */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-.emoji-customization table th, .emoji-customization table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+#emojiTable th, #emojiTable td {
+  border: 1px solid #ddd !important;
+  padding: 10px !important;
+  text-align: center !important;
   background-color: #ffffff !important; /* Fond blanc pour chaque cellule */
 }
 
-.emoji-customization table th {
-  background-color: #ffd700; /* Fond jaune pour les en-têtes */
-  color: #000;
+#emojiTable th {
+  background-color: #ffd700 !important; /* Fond jaune pour les en-têtes */
+  color: #000 !important;
 }
 
-.emoji-customization input[type="text"],
-.emoji-customization input[type="file"] {
-  width: 80%;
-  padding: 5px;
-  font-size: 1rem;
+#emojiTable input[type="text"],
+#emojiTable input[type="file"] {
+  width: 80% !important;
+  padding: 5px !important;
+  font-size: 1rem !important;
 }
 
-.emoji-customization button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #ffd700;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+#emojiTable button {
+  margin-top: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+  background-color: #ffd700 !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
 }
 
-.emoji-customization button:hover {
-  background-color: #e6c200;
+#emojiTable button:hover {
+  background-color: #e6c200 !important;
 }
+
 
 /* Grille des cartes */
 .card-container-wrapper {
