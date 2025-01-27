@@ -39,49 +39,6 @@ h1 {
   margin-bottom: 20px; /* Réduction de l'espace sous la vague pour la rapprocher du titre */
 }
 
-/* Section des boutons d'action */
-.actions {
-  margin-top: 20px;
-}
-
-.actions button {
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  background-color: #ffd700;
-  color: #000000;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.actions button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Curseurs pour ajuster les tailles */
-.slider-container {
-  margin: 20px 0;
-  width: 100%;
-}
-
-.slider-label {
-  display: block;
-  font-size: 1rem;
-  color: #000;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-input[type="range"] {
-  width: 300px;
-  margin: 0 auto;
-  display: block;
-}
-
 /* Table de personnalisation des émojis */
 #emojiTable {
   margin: 20px auto;
