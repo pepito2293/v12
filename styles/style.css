@@ -88,6 +88,7 @@ input[type="range"] {
   text-align: center;
   display: flex;
   justify-content: flex-end; /* Aligner le tableau à droite */
+  width: 100%; /* Pour prendre toute la largeur disponible */
 }
 
 .emoji-customization table {
@@ -95,16 +96,18 @@ input[type="range"] {
   border-collapse: collapse;
   width: 80%;
   background-color: #ffffff; /* Fond blanc pour le tableau */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optionnel : pour ajouter une légère ombre */
 }
 
 .emoji-customization table th, .emoji-customization table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
+  background-color: #ffffff; /* Fond blanc pour chaque cellule */
 }
 
 .emoji-customization table th {
-  background-color: #ffd700;
+  background-color: #ffd700; /* Fond jaune pour les en-têtes */
   color: #000;
 }
 
