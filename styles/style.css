@@ -65,18 +65,21 @@ h1 {
 /* Curseurs pour ajuster les tailles */
 .slider-container {
   margin: 20px 0;
+  width: 100%;
 }
 
 .slider-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  display: block;
+  font-size: 1rem;
+  color: #000;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 input[type="range"] {
   width: 300px;
+  margin: 0 auto;
+  display: block;
 }
 
 /* Table de personnalisation des émojis */
@@ -291,9 +294,6 @@ button:hover {
   background-color: #e6c200;
 }
 
-
-
-
 /* Masque complètement le champ input */
 input[type="file"] {
   display: none;
@@ -316,4 +316,3 @@ input[type="file"] {
 .custom-file-upload:hover {
   background-color: #e6c200;
 }
-
