@@ -255,19 +255,7 @@ footer p {
 
 /* Style pour le bouton "Choisir un fichier" */
 #emojiTable input[type="file"] {
-}
-
-#emojiTable button {
-  background-color: #ffd700 !important; /* Mettre le bouton "Choisir un fichier" en jaune */
-  color: #000 !important;
-  border: none !important;
-  padding: 10px 20px !important;
-  border-radius: 5px !important;
-  cursor: pointer !important;
-}
-
-#emojiTable button:hover {
-  background-color: #e6c200 !important;
+  display: none; /* Cacher l'élément input type="file" */
 }
 
 /* Masquer les textes "Aucun fichier choisi" */
