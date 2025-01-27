@@ -36,7 +36,7 @@ h1 {
   width: 100%;
   border-radius: 50% 50% 0 0;
   transform: rotate(180deg);
-  margin-bottom: 1px; /* Réduction de l'espace sous la vague pour la rapprocher du titre */
+  margin-bottom: 20px; /* Réduction de l'espace sous la vague pour la rapprocher du titre */
 }
 
 /* Section des boutons d'action */
