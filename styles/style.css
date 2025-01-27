@@ -84,16 +84,16 @@ input[type="range"] {
 
 /* Table de personnalisation des émojis */
 #emojiTable {
-  margin: 0;
+  margin: 20px auto;
   border-collapse: collapse;
-  width: 80%;
+  width: 90%; /* Ajuster la largeur du tableau */
   background-color: #ffffff !important; /* Fond blanc pour le tableau */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 #emojiTable th, #emojiTable td {
   border: 1px solid #ddd !important;
-  padding: 10px !important;
+  padding: 12px 15px !important;
   text-align: center !important;
   background-color: #ffffff !important; /* Fond blanc pour chaque cellule */
 }
@@ -103,17 +103,12 @@ input[type="range"] {
   color: #000 !important;
 }
 
-#emojiTable input[type="text"],
 #emojiTable input[type="file"] {
-  width: 80% !important;
   padding: 5px !important;
-  font-size: 1rem !important;
 }
 
 #emojiTable button {
-  margin-top: 20px !important;
   padding: 10px 20px !important;
-  font-size: 1rem !important;
   background-color: #ffd700 !important;
   color: #000 !important;
   border: none !important;
@@ -124,7 +119,6 @@ input[type="range"] {
 #emojiTable button:hover {
   background-color: #e6c200 !important;
 }
-
 
 /* Grille des cartes */
 .card-container-wrapper {
