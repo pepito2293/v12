@@ -7,7 +7,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
 }
 
 /* Style du logo */
@@ -62,6 +68,11 @@ h1 {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
+button:focus {
+  outline: 2px dashed #000;
+  outline-offset: 2px;
+}
+
 /* Curseurs pour ajuster les tailles */
 .slider-container {
   margin: 20px 0;
@@ -91,7 +102,8 @@ input[type="range"] {
   width: 80%;
 }
 
-.emoji-customization table th, .emoji-customization table td {
+.emoji-customization table th,
+.emoji-customization table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
@@ -118,6 +130,7 @@ input[type="range"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .emoji-customization button:hover {
@@ -139,6 +152,18 @@ input[type="range"] {
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 /* Style des cartes */
 .card {
   width: 250px;
@@ -147,6 +172,12 @@ input[type="range"] {
   background: linear-gradient(135deg, #ffffff, #f9f9f9);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Style des émojis ou images dans les cartes */
@@ -159,8 +190,6 @@ input[type="range"] {
   cursor: pointer;
   user-select: none;
   transition: transform 0.1s ease;
-
-  /* Suppression de la bulle */
   border: none;
   background: none;
   border-radius: 0;
@@ -170,32 +199,6 @@ input[type="range"] {
   max-width: 100%;
   max-height: 100%;
   display: block;
-}
-
-/* Contrôle de taille d'émoji */
-.size-control {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.size-control label {
-  font-size: 1rem;
-  color: #000;
-}
-
-.size-control input {
-  width: 150px;
 }
 
 /* Pied de page */
@@ -223,6 +226,11 @@ footer p {
 .menu-icon {
   font-size: 2rem;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#menu-toggle:checked + .menu-icon {
+  transform: rotate(90deg);
 }
 
 .menu-items {
@@ -257,48 +265,6 @@ footer p {
   display: block;
 }
 
-/* Table de personnalisation */
-#emojiTable {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 90%;
-  text-align: center;
-}
-
-#emojiTable th,
-#emojiTable td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-#emojiTable th {
-  background-color: #ffd700;
-  color: #000;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #ffd700;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #e6c200;
-}
-
-
-
-
-/* Masque complètement le champ input */
-input[type="file"] {
-  display: none;
-}
-
 /* Style du bouton personnalisé */
 .custom-file-upload {
   display: inline-block;
@@ -312,8 +278,25 @@ input[type="file"] {
   transition: background-color 0.3s;
 }
 
-/* Effet de survol */
 .custom-file-upload:hover {
   background-color: #e6c200;
 }
 
+/* Barre de notifications (toast) */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffd700;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
