@@ -95,8 +95,8 @@ input[type="range"] {
   margin: 0;
   border-collapse: collapse;
   width: 80%;
-  background-color: #ffffff; /* Fond blanc pour le tableau */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optionnel : pour ajouter une légère ombre */
+  background-color: #ffffff !important; /* Fond blanc pour le tableau, avec priorité */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .emoji-customization table th, .emoji-customization table td {
