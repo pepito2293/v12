@@ -103,19 +103,35 @@ input[type="range"] {
     color: #000 !important;
 }
 
-/* Style pour les inputs de type fichier */
-#emojiTable input[type="file"] {
+/* Style pour le conteneur du bouton "Choisir un fichier" */
+.bouton-container {
+    position: relative; /* Pour positionner le label par-dessus l'input */
+    display: inline-block; /* Pour que le conteneur occupe la largeur du bouton */
+}
+
+/* Style pour masquer l'input de type fichier */
+.bouton-container input[type="file"] {
+    position: absolute; /* Pour masquer l'input de manière absolue */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Pour rendre l'input invisible */
+    cursor: pointer; /* Pour que le curseur change au survol du bouton */
+}
+
+/* Style pour le label (bouton personnalisé) */
+.bouton-container label {
     padding: 10px 20px !important;
     background-color: #ffd700 !important;
     color: #000 !important;
     border: none !important;
     border-radius: 5px !important;
     cursor: pointer !important;
-    appearance: none;
-    -webkit-appearance: none;
+    display: inline-block; /* Pour que le label se comporte comme un bouton */
 }
 
-#emojiTable input[type="file"]:hover {
+.bouton-container label:hover {
     background-color: #e6c200 !important;
 }
 
@@ -236,29 +252,4 @@ footer p {
     list-style: none;
     margin: 0;
     padding: 0;
-    background-color: #ffd700;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 200px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.menu-items li {
-    padding: 10px;
-}
-
-.menu-items li a {
-    text-decoration: none;
-    color: #000;
-    display: block;
-}
-
-.menu-items li:hover {
-    background-color: #e6c200;
-}
-
-#menu-toggle:checked + .menu-icon + .menu-items {
-    display: block;
-}
+    background-color: #ffd700
