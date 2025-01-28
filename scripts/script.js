@@ -244,7 +244,10 @@ function populateEmojiTable() {
     emojiCell.id = `current-emoji-${index}`;
     row.appendChild(emojiCell);
 
- 
+    const inputCell = document.createElement("td");
+    const uploadButton = document.createElement("label");
+    uploadButton.className = "custom-file-upload";
+    uploadButton.textContent = "Choisir un fichier";
 
     const fileInput = document.createElement("input");
     fileInput.type = "file";
