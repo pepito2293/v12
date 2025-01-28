@@ -193,8 +193,8 @@ async function downloadCardsAsPDF() {
     const cardHeight = 85.53; // Taille d'une carte
     const margin = 10; // Marge autour des cartes
 
-    const cardsPerRow = 2;  // Nombre de cartes par ligne
-    const cardsPerCol = 3;  // Nombre de cartes par colonne
+    const cardsPerRow = 3;  // Nombre de cartes par ligne
+    const cardsPerCol = 4;  // Nombre de cartes par colonne
     const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page
 
     let currentCardIndex = 0;
@@ -223,7 +223,7 @@ async function downloadCardsAsPDF() {
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si une page est remplie, on ajoute une nouvelle page
+      // Si la page est remplie, on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
         pdf.addPage();
       }
