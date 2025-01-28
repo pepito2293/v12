@@ -193,8 +193,8 @@ async function downloadCardsAsPDF() {
     const cardHeight = 85.53; // Taille d'une carte
     const margin = 10;  // Marge autour des cartes
 
-    const cardsPerRow = 3;  // Nombre de cartes par ligne
-    const cardsPerCol = 4;  // Nombre de cartes par colonne
+    const cardsPerRow = 2;  // Nombre de cartes par ligne
+    const cardsPerCol = 3;  // Nombre de cartes par colonne
     const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page
 
     let currentCardIndex = 0;
