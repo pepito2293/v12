@@ -198,13 +198,18 @@ async function downloadCardsAsPDF() {
 
     let currentCardIndex = 0;
 
+    // Centrage horizontal des cartes sur la page
+    const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;
+    const offsetX = (pageWidth - totalCardWidth - margin) / 2; // Calcul du décalage pour centrer les cartes
+
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
 
       const row = Math.floor(currentCardIndex / cardsPerRow) % cardsPerCol;
       const col = currentCardIndex % cardsPerRow;
-      const x = margin + col * (cardWidth + margin);
+
+      const x = offsetX + col * (cardWidth + margin); // Décalage pour centrer les cartes horizontalement
       const y = margin + row * (cardHeight + margin);
 
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
@@ -222,6 +227,7 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
+
 
 // Fonction pour remplir le tableau des émojis personnalisables
 function populateEmojiTable() {
