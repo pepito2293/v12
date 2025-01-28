@@ -249,6 +249,13 @@ function populateEmojiTable() {
     uploadButton.className = "custom-file-upload";
     uploadButton.textContent = "Choisir un fichier";
 
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.dataset.index = index;
+
+    uploadButton.appendChild(fileInput);
+    inputCell.appendChild(uploadButton);
     
 
     fileInput.addEventListener("change", (event) => {
