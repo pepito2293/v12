@@ -191,7 +191,7 @@ async function downloadCardsAsPDF() {
     const pageHeight = pdf.internal.pageSize.getHeight();  // Hauteur de la page
     const cardWidth = 85.53; // Taille d'une carte
     const cardHeight = 85.53; // Taille d'une carte
-    const margin = 10;  // Marge autour des cartes
+    const margin = 10; // Marge autour des cartes
 
     const cardsPerRow = 2;  // Nombre de cartes par ligne
     const cardsPerCol = 3;  // Nombre de cartes par colonne
@@ -199,9 +199,11 @@ async function downloadCardsAsPDF() {
 
     let currentCardIndex = 0;
 
-    // Calcul de l'offset horizontal et vertical pour centrer les cartes
+    // Calcul de la largeur totale et de la hauteur totale des cartes
     const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;  // Largeur totale des cartes
     const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;  // Hauteur totale des cartes
+
+    // Décalage horizontal et vertical pour centrer les cartes
     const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
     const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
 
@@ -212,14 +214,16 @@ async function downloadCardsAsPDF() {
       const row = Math.floor(currentCardIndex / cardsPerRow);  // Ligne actuelle
       const col = currentCardIndex % cardsPerRow;  // Colonne actuelle
 
-      // Positionnement des cartes sur la page
-      const x = offsetX + col * (cardWidth + margin);  // Position horizontale
-      const y = offsetY + row * (cardHeight + margin);  // Position verticale
+      // Calcul de la position horizontale (en fonction de l'offset)
+      const x = offsetX + col * (cardWidth + margin); 
+      // Calcul de la position verticale (en fonction de l'offset)
+      const y = offsetY + row * (cardHeight + margin); 
 
+      // Ajout de l'image de la carte sur le PDF
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si la page est remplie, ajouter une nouvelle page
+      // Si une page est remplie, on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
         pdf.addPage();
       }
