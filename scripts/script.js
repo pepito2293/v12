@@ -189,8 +189,8 @@ async function downloadCardsAsPDF() {
     const pdf = new jsPDF("portrait", "mm", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const cardWidth = 70; // Taille d'une carte sur le PDF
-    const cardHeight = 324; // Taille d'une carte sur le PDF
+    const cardWidth = 85; // Taille d'une carte sur le PDF
+    const cardHeight = 85; // Taille d'une carte sur le PDF
     const margin = 10;
     const cardsPerRow = Math.floor((pageWidth - margin) / (cardWidth + margin));
     const cardsPerCol = Math.floor((pageHeight - margin) / (cardHeight + margin));
