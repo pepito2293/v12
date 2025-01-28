@@ -1,350 +1,255 @@
-
-// Liste des émojis par défaut
-const defaultEmojis = [
-  "🍓", "🍕", "🍔", "🌵", "🐱", "🐟", "🎸", "🎨", "📱", "🚗",
-  "🍦", "🥑", "🦄", "🌙", "🔥", "🎶", "💻", "🐻", "🍩", "🏀",
-  "🌈", "🍿", "🥂", "🍹", "🎁", "🏞️", "🚀", "🎧", "👑", "⚽",
-  "📚", "🎂", "🍪", "🌻", "🎀", "🐶", "🍇", "🌎", "🍉", "🎤",
-  "🎯", "🍋", "🎹", "🐾", "🪐", "🛴", "🦋", "🍫", "🐨", "🍒",
-  "🌴", "🚲", "🎮", "⚡", "⭐", "🌟", "☕"
-];
-
-// Fonction pour charger les émojis personnalisés depuis `localStorage`
-function loadEmojiList() {
-  const storedEmojis = localStorage.getItem("emojiList");
-  return storedEmojis ? JSON.parse(storedEmojis) : [...defaultEmojis];
+/* --- Styles globaux pour la page --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c4e7fd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-// Fonction pour sauvegarder les émojis dans `localStorage`
-function saveEmojiList() {
-  localStorage.setItem("emojiList", JSON.stringify(emojiList));
+/* --- Style du logo --- */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
 }
 
-// Initialisation de la liste d'émojis (personnalisée ou par défaut)
-let emojiList = loadEmojiList();
-
-// Fonction pour générer les cartes Dobble
-function generateDobbleCards() {
-  const n = 7; // Nombre de symboles par carte - 1
-  const totalSymbols = n * n + n + 1;
-  const symbols = emojiList.slice(0, totalSymbols);
-  const cards = [];
-
-  for (let i = 0; i <= n; i++) {
-    const card = [symbols[0]];
-    for (let j = 0; j < n; j++) {
-      card.push(symbols[1 + i * n + j]);
-    }
-    cards.push(card);
-  }
-
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      const card = [symbols[1 + i]];
-      for (let k = 0; k < n; k++) {
-        const index = 1 + n + k * n + ((i * k + j) % n);
-        card.push(symbols[index]);
-      }
-      cards.push(card);
-    }
-  }
-
-  return cards.slice(0, 55);
+/* --- Style du titre principal (h1) --- */
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #000000;
+    text-shadow: 0px 0px 0px #000000;
+    margin-top: 20px;
+    text-align: center;
 }
 
-// Fonction pour afficher les cartes dans la grille
-function generateCards() {
-  const cardContainer = document.getElementById("cardContainer");
-  cardContainer.innerHTML = "";
-
-  const cards = generateDobbleCards();
-  cards.forEach((card) => {
-    const cardDiv = document.createElement("div");
-    cardDiv.className = "card";
-    positionSymbols(cardDiv, card);
-    cardContainer.appendChild(cardDiv);
-  });
+/* --- Vague décorative sous le titre --- */
+.wave {
+    background-color: #ffd700;
+    height: 30px;
+    width: 100%;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(180deg);
+    margin-bottom: 20px;
 }
 
-// Fonction pour positionner les symboles sur une carte
-function positionSymbols(cardDiv, card) {
-  const cardSize = 250;
-  const margin = 20;
-
-  // Récupère les valeurs des curseurs pour les tailles minimale et maximale
-  const minSize = parseInt(document.getElementById("minSize").value, 10) || 30;
-  const maxSize = parseInt(document.getElementById("maxSize").value, 10) || 70;
-
-  const positions = [];
-
-  card.forEach((symbol) => {
-    let isValidPosition = false;
-    let x, y, size;
-
-    while (!isValidPosition) {
-      size = Math.random() * (maxSize - minSize) + minSize; // Taille aléatoire
-      x = margin + Math.random() * (cardSize - 2 * margin - size);
-      y = margin + Math.random() * (cardSize - 2 * margin - size);
-
-      // Vérifie que les émojis ne se chevauchent pas
-      isValidPosition = positions.every(pos => {
-        const distance = Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
-        return distance > (pos.size + size) / 2 + 10;
-      });
-    }
-
-    positions.push({ x, y, size });
-
-    const rotation = Math.random() * 360; // Rotation aléatoire entre 0 et 360 degrés
-    const symbolDiv = document.createElement("div");
-    symbolDiv.className = "symbol";
-
-    if (symbol.startsWith("data:image")) {
-      const img = document.createElement("img");
-      img.src = symbol;
-      img.style.width = `${size}px`;
-      img.style.height = `${size}px`;
-      symbolDiv.appendChild(img);
-    } else {
-      symbolDiv.textContent = symbol;
-      symbolDiv.style.fontSize = `${size}px`;
-    }
-
-    // Applique les styles, y compris la rotation
-    Object.assign(symbolDiv.style, {
-      left: `${x}px`,
-      top: `${y}px`,
-      width: `${size}px`,
-      height: `${size}px`,
-      transform: `rotate(${rotation}deg)`, // Applique la rotation
-      transformOrigin: "center", // Centre la rotation
-    });
-
-    enableDrag(symbolDiv); // Active le déplacement pour chaque émoji
-    cardDiv.appendChild(symbolDiv);
-  });
+/* --- Section des boutons d'action --- */
+.actions {
+    margin-top: 20px;
 }
 
-// Fonction pour activer le déplacement des émojis
-function enableDrag(symbol) {
-  let isDragging = false; // Indique si le symbole est en cours de déplacement
-  let offsetX, offsetY;
-
-  // Empêche le comportement par défaut de drag & drop
-  symbol.addEventListener("dragstart", (event) => {
-    event.preventDefault();
-  });
-
-  // Début du déplacement
-  symbol.addEventListener("mousedown", (event) => {
-    isDragging = true;
-    offsetX = event.clientX - symbol.offsetLeft;
-    offsetY = event.clientY - symbol.offsetTop;
-    symbol.style.cursor = "grabbing"; // Change le curseur pendant le déplacement
-  });
-
-  // Déplacement de l'émoji
-  document.addEventListener("mousemove", (event) => {
-    if (isDragging) {
-      const parentRect = symbol.parentElement.getBoundingClientRect();
-      let newLeft = event.clientX - offsetX;
-      let newTop = event.clientY - offsetY;
-
-      // Empêche le symbole de sortir de la carte
-      if (newLeft < 0) newLeft = 0;
-      if (newTop < 0) newTop = 0;
-      if (newLeft + symbol.offsetWidth > parentRect.width) {
-        newLeft = parentRect.width - symbol.offsetWidth;
-      }
-      if (newTop + symbol.offsetHeight > parentRect.height) {
-        newTop = parentRect.height - symbol.offsetHeight;
-      }
-
-      symbol.style.left = `${newLeft}px`;
-      symbol.style.top = `${newTop}px`;
-    }
-  });
-
-  // Fin du déplacement
-  document.addEventListener("mouseup", () => {
-    if (isDragging) {
-      isDragging = false;
-      symbol.style.cursor = "move"; // Retourne au curseur par défaut
-    }
-  });
+.actions button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffd700;
+    color: #000000;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-// Fonction pour télécharger les cartes en PDF
-async function downloadCardsAsPDF() {
-  try {
-    const cardContainer = document.getElementById("cardContainer");
-    const cards = cardContainer.querySelectorAll(".card");
-
-    if (cards.length === 0) {
-      alert("Aucune carte à télécharger. Veuillez d'abord générer les cartes.");
-      return;
-    }
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("portrait", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const cardWidth = 85.53; // Taille d'une carte sur le PDF
-    const cardHeight = 85.53; // Taille d'une carte sur le PDF
-    const margin = 10;
-    const cardsPerRow = Math.floor((pageWidth - margin) / (cardWidth + margin));
-    const cardsPerCol = Math.floor((pageHeight - margin) / (cardHeight + margin));
-    const cardsPerPage = cardsPerRow * cardsPerCol;
-
-    let currentCardIndex = 0;
-
-    for (let i = 0; i < cards.length; i++) {
-      const canvas = await html2canvas(cards[i], { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
-
-      const row = Math.floor(currentCardIndex / cardsPerRow) % cardsPerCol;
-      const col = currentCardIndex % cardsPerRow;
-      const x = margin + col * (cardWidth + margin);
-      const y = margin + row * (cardHeight + margin);
-
-      pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
-      currentCardIndex++;
-
-      if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
-        pdf.addPage();
-      }
-    }
-
-    pdf.save("dobble_cards.pdf");
-    alert("Le PDF a été téléchargé avec succès !");
-  } catch (error) {
-    console.error("Erreur lors du téléchargement du PDF :", error);
-    alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
-  }
+.actions button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-// Fonction pour remplir le tableau des émojis personnalisables
-function populateEmojiTable() {
-  const tableBody = document.getElementById("emojiTable").querySelector("tbody");
-  tableBody.innerHTML = "";
-
-  emojiList.forEach((emoji, index) => {
-    const row = document.createElement("tr");
-
-    const numberCell = document.createElement("td");
-    numberCell.textContent = index + 1;
-    row.appendChild(numberCell);
-
-    const emojiCell = document.createElement("td");
-    if (emoji.startsWith("data:image")) {
-      emojiCell.innerHTML = `<img src="${emoji}" width="20" height="20">`;
-    } else {
-      emojiCell.textContent = emoji;
-    }
-    emojiCell.id = `current-emoji-${index}`;
-    row.appendChild(emojiCell);
-
-    const inputCell = document.createElement("td");
-    const uploadButton = document.createElement("label");
-    uploadButton.className = "custom-file-upload";
-    uploadButton.textContent = "Choisir un fichier";
-
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.accept = "image/*";
-    fileInput.dataset.index = index;
-
-    uploadButton.appendChild(fileInput);
-    inputCell.appendChild(uploadButton);
-    
-
-    fileInput.addEventListener("change", (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          emojiList[index] = e.target.result;
-          saveEmojiList();
-          populateEmojiTable();
-          generateCards();
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    row.appendChild(inputCell);
-
-    const actionCell = document.createElement("td");
-    const resetButton = document.createElement("button");
-    resetButton.textContent = "Réinitialiser";
-    resetButton.onclick = () => resetEmoji(index);
-    actionCell.appendChild(resetButton);
-    row.appendChild(actionCell);
-
-    tableBody.appendChild(row);
-  });
+/* --- Curseur pour ajuster les tailles --- */
+.slider-container {
+    margin: 20px 0;
+    width: 100%;
 }
 
-// Fonction pour réinitialiser un émoji
-function resetEmoji(index) {
-  emojiList[index] = defaultEmojis[index];
-  saveEmojiList();
-  populateEmojiTable();
-  generateCards();
+.slider-label {
+    display: block;
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-// Fonction pour mettre à jour l'affichage des curseurs
-function updatePreview() {
-  const minSizeInput = document.getElementById("minSize");
-  const maxSizeInput = document.getElementById("maxSize");
-  document.getElementById("minSizeValue").textContent = `${minSizeInput.value}px`;
-  document.getElementById("maxSizeValue").textContent = `${maxSizeInput.value}px`;
-
-  if (parseInt(minSizeInput.value, 10) > parseInt(maxSizeInput.value, 10)) {
-    maxSizeInput.value = minSizeInput.value;
-    document.getElementById("maxSizeValue").textContent = `${maxSizeInput.value}px`;
-  }
+input[type="range"] {
+    width: 300px;
+    margin: 0 auto;
+    display: block;
 }
 
-// Initialisation
-document.addEventListener("DOMContentLoaded", () => {
-  populateEmojiTable();
-  generateCards();
-
-  document.getElementById("minSize").addEventListener("input", () => {
-    updatePreview();
-    generateCards();
-  });
-
-  document.getElementById("maxSize").addEventListener("input", () => {
-    updatePreview();
-    generateCards();
-  });
-});
-
-async function exportCardsAsZip() {
-  const cardContainer = document.getElementById("cardContainer");
-  const cards = cardContainer.querySelectorAll(".card");
-
-  if (cards.length === 0) {
-    alert("Aucune carte à exporter. Veuillez d'abord générer les cartes.");
-    return;
-  }
-
-  const zip = new JSZip(); // Initialisation du fichier ZIP
-  const folder = zip.folder("Cartes_Dobble"); // Création d'un dossier dans le ZIP
-
-  for (let i = 0; i < cards.length; i++) {
-    const canvas = await html2canvas(cards[i], { scale: 2 }); // Capture la carte en tant que canvas
-    const imgData = canvas.toDataURL("image/png"); // Convertit en PNG
-
-    // Ajoute l'image au dossier ZIP
-    folder.file(`carte_dobble_${i + 1}.png`, imgData.split(",")[1], { base64: true });
-  }
-
-  // Génère le fichier ZIP
-  zip.generateAsync({ type: "blob" }).then(function (content) {
-    saveAs(content, "cartes_dobble.zip"); // Télécharge le fichier ZIP
-    alert("Les 55 cartes ont été téléchargées en tant que fichier ZIP !");
-  });
+/* --- Table de personnalisation des émojis --- */
+#emojiTable {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 90%;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
+
+#emojiTable th, #emojiTable td {
+    border: 1px solid #ddd !important;
+    padding: 12px 15px !important;
+    text-align: center !important;
+    background-color: #ffffff !important;
+}
+
+#emojiTable th {
+    background-color: #ffd700 !important;
+    color: #000 !important;
+}
+
+/* Style pour le conteneur du bouton "Choisir un fichier" */
+.bouton-container {
+    position: relative; /* Pour positionner le label par-dessus l'input */
+    display: inline-block; /* Pour que le conteneur occupe la largeur du bouton */
+}
+
+/* Style pour masquer l'input de type fichier */
+.bouton-container input[type="file"] {
+    position: absolute; /* Pour masquer l'input de manière absolue */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Pour rendre l'input invisible */
+    cursor: pointer; /* Pour que le curseur change au survol du bouton */
+}
+
+/* Style pour le label (bouton personnalisé) */
+.bouton-container label {
+    padding: 10px 20px !important;
+    background-color: #ffd700 !important;
+    color: #000 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-block; /* Pour que le label se comporte comme un bouton */
+}
+
+.bouton-container label:hover {
+    background-color: #e6c200 !important;
+}
+
+#emojiTable button {
+    padding: 10px 20px !important;
+    background-color: #ffd700 !important;
+    color: #000 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+}
+
+#emojiTable button:hover {
+    background-color: #e6c200 !important;
+}
+
+/* --- Grille des cartes --- */
+.card-container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    justify-content: center;
+}
+
+/* --- Style des cartes --- */
+.card {
+    width: 250px;
+    height: 250px;
+    border: 3px solid #000000;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* --- Style des émojis ou images dans les cartes --- */
+.symbol {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s ease;
+    border: none;
+    background: none;
+    border-radius: 0;
+}
+
+.symbol img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+/* --- Contrôle de taille d'émoji --- */
+.size-control {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.size-control label {
+    font-size: 1rem;
+    color: #000;
+}
+
+.size-control input {
+    width: 150px;
+}
+
+/* --- Pied de page --- */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #000;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+/* --- Menu hamburger --- */
+.hamburger-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.menu-items {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #ffd700
