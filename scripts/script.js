@@ -48,19 +48,19 @@ function populateEmojiTable() {
     // Colonne Nouvelle image (Correction appliquée)
     const inputCell = document.createElement("td");
 
-    // Crée un bouton personnalisé pour ajouter une image
-    const uploadButton = document.createElement("label");
-    uploadButton.className = "custom-file-upload";
+    // Création d'un bouton "Ajouter un fichier"
+    const uploadButton = document.createElement("button");
     uploadButton.textContent = "Ajouter un fichier";
+    uploadButton.className = "upload-btn";
 
-    // Crée un champ de téléchargement caché
+    // Création d'un champ de sélection de fichier (caché)
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";
     fileInput.dataset.index = index;
-    fileInput.style.display = "none"; // CACHE l'input pour éviter l'affichage du texte
+    fileInput.style.display = "none"; // Cache l'input pour éviter le texte "Aucun fichier choisi"
 
-    // Ajoute un écouteur d'événement pour détecter le choix du fichier
+    // Événement pour détecter le choix du fichier
     fileInput.addEventListener("change", (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -75,12 +75,12 @@ function populateEmojiTable() {
       }
     });
 
-    // Relie le bouton au champ input
+    // Cliquer sur le bouton déclenche l'ouverture du fichier caché
     uploadButton.addEventListener("click", () => {
-      fileInput.click(); // Simule un clic sur l'input caché
+      fileInput.click();
     });
 
-    // Ajoute le bouton et l'input à la cellule
+    // Ajout des éléments à la cellule
     inputCell.appendChild(uploadButton);
     inputCell.appendChild(fileInput);
     row.appendChild(inputCell);
@@ -89,6 +89,7 @@ function populateEmojiTable() {
     const actionCell = document.createElement("td");
     const resetButton = document.createElement("button");
     resetButton.textContent = "Réinitialiser";
+    resetButton.className = "reset-btn";
     resetButton.onclick = () => resetEmoji(index);
     actionCell.appendChild(resetButton);
     row.appendChild(actionCell);
