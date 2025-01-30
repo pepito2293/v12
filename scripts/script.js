@@ -208,6 +208,7 @@ async function downloadCardsAsPDF() {
     const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
     const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
 
+    // Ajout des cartes
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
@@ -224,9 +225,9 @@ async function downloadCardsAsPDF() {
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si la page est remplie, on ajoute une nouvelle page
+      // Si le nombre de cartes dépasse la capacité d'une page, on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
-        pdf.addPage();
+        pdf.addPage();  // Ajout d'une nouvelle page
       }
     }
 
@@ -238,6 +239,7 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
+
 
 
 // Fonction pour remplir le tableau des émojis personnalisables
