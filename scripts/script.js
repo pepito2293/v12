@@ -193,36 +193,38 @@ async function downloadCardsAsPDF() {
     const cardHeight = 85.53; // Taille d'une carte
     const margin = 10; // Marge autour des cartes
 
-    // Disposition 2x3 : 2 lignes, 3 cartes par ligne
-    const cardsPerRow = 3;  // Nombre de cartes par ligne
-    const cardsPerCol = 2;  // Nombre de cartes par colonne
+    // Disposition 3x2 : 3 lignes, 2 cartes par ligne
+    const cardsPerRow = 2;  // Nombre de cartes par ligne
+    const cardsPerCol = 3;  // Nombre de cartes par colonne
     const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page
 
     let currentCardIndex = 0;
 
-    // Positions des zones pour superposer les cartes (2x3)
-    const cardPositions = [
-      { x: 10, y: 10 },  // Zone 1 (ligne 1, colonne 1)
-      { x: 100, y: 10 }, // Zone 2 (ligne 1, colonne 2)
-      { x: 190, y: 10 }, // Zone 3 (ligne 1, colonne 3)
-      { x: 10, y: 100 }, // Zone 4 (ligne 2, colonne 1)
-      { x: 100, y: 100 }, // Zone 5 (ligne 2, colonne 2)
-      { x: 190, y: 100 }, // Zone 6 (ligne 2, colonne 3)
-    ];
+    // Calcul de la largeur totale et de la hauteur totale des cartes
+    const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;  // Largeur totale des cartes
+    const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;  // Hauteur totale des cartes
+
+    // Décalage horizontal et vertical pour centrer les cartes
+    const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
+    const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
 
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
 
-      // Utilisation des positions pré-définies pour superposer les cartes
-      const pos = cardPositions[i % cardPositions.length];  // Récupère la position à partir de l'index actuel
+      const row = Math.floor(currentCardIndex / cardsPerRow);  // Ligne actuelle
+      const col = currentCardIndex % cardsPerRow;  // Colonne actuelle
 
-      // Ajout de l'image de la carte à la position spécifiée
-      pdf.addImage(imgData, "PNG", pos.x, pos.y, cardWidth, cardHeight);
+      // Calcul de la position horizontale (en fonction de l'offset)
+      const x = offsetX + col * (cardWidth + margin); 
+      // Calcul de la position verticale (en fonction de l'offset)
+      const y = offsetY + row * (cardHeight + margin); 
 
+      // Ajout de l'image de la carte sur le PDF
+      pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si une page est remplie, on ajoute une nouvelle page
+      // Si la page est remplie, on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
         pdf.addPage();
       }
@@ -236,6 +238,7 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
+
 
 // Fonction pour remplir le tableau des émojis personnalisables
 function populateEmojiTable() {
