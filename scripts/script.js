@@ -187,50 +187,42 @@ async function downloadCardsAsPDF() {
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("portrait", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();  // Largeur de la page
-    const pageHeight = pdf.internal.pageSize.getHeight();  // Hauteur de la page
-    const cardWidth = 85.53; // Taille d'une carte
-    const cardHeight = 85.53; // Taille d'une carte
-    const margin = 10; // Marge autour des cartes
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const cardWidth = 85.53;
+    const cardHeight = 85.53;
+    const margin = 10;
 
-    const cardsPerRow = 2;  // Nombre de cartes par ligne (2)
-    const cardsPerCol = 3;  // Nombre de cartes par colonne (3)
-    const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page (6 cartes)
+    const cardsPerRow = 2;
+    const cardsPerCol = 3;
+    const cardsPerPage = cardsPerRow * cardsPerCol;
 
     let currentCardIndex = 0;
 
-    // Calcul de la largeur totale et de la hauteur totale des cartes
-    const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;  // Largeur totale des cartes
-    const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;  // Hauteur totale des cartes
+    const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;
+    const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;
 
-    // Décalage horizontal et vertical pour centrer les cartes
-    const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
-    const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
+    const offsetX = (pageWidth - totalCardWidth) / 2;
+    const offsetY = (pageHeight - totalCardHeight) / 2;
 
-    // Ajouter les cartes sur le PDF
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
 
-      const row = Math.floor(currentCardIndex / cardsPerRow);  // Ligne actuelle
-      const col = currentCardIndex % cardsPerRow;  // Colonne actuelle
+      const row = Math.floor(currentCardIndex / cardsPerRow);
+      const col = currentCardIndex % cardsPerRow;
 
-      // Calcul de la position horizontale (en fonction de l'offset)
-      const x = offsetX + col * (cardWidth + margin); 
-      // Calcul de la position verticale (en fonction de l'offset)
-      const y = offsetY + row * (cardHeight + margin); 
+      const x = offsetX + col * (cardWidth + margin);
+      const y = offsetY + row * (cardHeight + margin);
 
-      // Ajout de l'image de la carte sur le PDF
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si la page est remplie (6 cartes), on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
-        pdf.addPage();  // Ajout d'une nouvelle page
+        pdf.addPage();
       }
     }
 
-    // Sauvegarde du fichier PDF
     pdf.save("dobble_cards.pdf");
     alert("Le PDF a été téléchargé avec succès !");
   } catch (error) {
@@ -238,7 +230,6 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
-
 
 
 // Fonction pour remplir le tableau des émojis personnalisables
