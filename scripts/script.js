@@ -193,10 +193,9 @@ async function downloadCardsAsPDF() {
     const cardHeight = 85.53; // Taille d'une carte
     const margin = 10; // Marge autour des cartes
 
-    // Disposition 3x2 : 3 lignes, 2 cartes par ligne
-    const cardsPerRow = 2;  // Nombre de cartes par ligne
-    const cardsPerCol = 3;  // Nombre de cartes par colonne
-    const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page
+    const cardsPerRow = 2;  // Nombre de cartes par ligne (2)
+    const cardsPerCol = 3;  // Nombre de cartes par colonne (3)
+    const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page (6 cartes)
 
     let currentCardIndex = 0;
 
@@ -208,7 +207,7 @@ async function downloadCardsAsPDF() {
     const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
     const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
 
-    // Ajout des cartes
+    // Ajouter les cartes sur le PDF
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
@@ -225,7 +224,7 @@ async function downloadCardsAsPDF() {
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si le nombre de cartes dépasse la capacité d'une page, on ajoute une nouvelle page
+      // Si la page est remplie (6 cartes), on ajoute une nouvelle page
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
         pdf.addPage();  // Ajout d'une nouvelle page
       }
