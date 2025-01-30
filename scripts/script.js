@@ -225,11 +225,9 @@ async function downloadCardsAsPDF() {
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Si on a atteint 6 cartes, ajouter une nouvelle page
+      // Vérifier si la page est pleine, ajouter une nouvelle page si nécessaire
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
         pdf.addPage();  // Ajouter une nouvelle page après 6 cartes
-        // Réinitialiser le décalage pour la nouvelle page
-        offsetY = (pageHeight - totalCardHeight) / 2;
       }
     }
 
