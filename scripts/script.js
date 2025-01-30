@@ -203,7 +203,7 @@ async function downloadCardsAsPDF() {
     const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;
 
     const offsetX = (pageWidth - totalCardWidth) / 2;
-    const offsetY = (pageHeight - totalCardHeight) / 2;
+    const offsetY = margin;  // Ajustement pour commencer en haut de la page
 
     for (let i = 0; i < cards.length; i++) {
       const canvas = await html2canvas(cards[i], { scale: 2 });
@@ -230,7 +230,6 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
-
 
 // Fonction pour remplir le tableau des émojis personnalisables
 function populateEmojiTable() {
