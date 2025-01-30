@@ -174,7 +174,7 @@ function enableDrag(symbol) {
   });
 }
 
-// Fonction pour télécharger les cartes en PDF
+// Fonction pour télécharger les cartes en 
 async function downloadCardsAsPDF() {
   try {
     const cardContainer = document.getElementById("cardContainer");
@@ -187,51 +187,53 @@ async function downloadCardsAsPDF() {
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("portrait", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();  // Largeur de la page
-    const pageHeight = pdf.internal.pageSize.getHeight();  // Hauteur de la page
-    const cardWidth = 85.53; // Taille d'une carte
-    const cardHeight = 85.53; // Taille d'une carte
-    const margin = 10; // Marge autour des cartes
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const cardWidth = 85.53;
+    const cardHeight = 85.53;
+    const margin = 10;
 
-    // Disposition 3x2 : 3 lignes, 2 cartes par ligne
-    const cardsPerRow = 2;  // Nombre de cartes par ligne
-    const cardsPerCol = 3;  // Nombre de cartes par colonne
-    const cardsPerPage = cardsPerRow * cardsPerCol; // Nombre total de cartes par page (6 cartes)
+    // Calcul dynamique du nombre de cartes par page
+    const cardsPerRow = Math.floor((pageWidth - 2 * margin) / (cardWidth + margin));
+    const cardsPerCol = Math.floor((pageHeight - 2 * margin) / (cardHeight + margin));
+    const cardsPerPage = cardsPerRow * cardsPerCol;
 
     let currentCardIndex = 0;
 
-    // Calcul de la largeur totale et de la hauteur totale des cartes
-    const totalCardWidth = cardsPerRow * cardWidth + (cardsPerRow - 1) * margin;  // Largeur totale des cartes
-    const totalCardHeight = cardsPerCol * cardHeight + (cardsPerCol - 1) * margin;  // Hauteur totale des cartes
-
-    // Décalage horizontal et vertical pour centrer les cartes
-    const offsetX = (pageWidth - totalCardWidth) / 2;  // Décalage horizontal pour centrer
-    const offsetY = (pageHeight - totalCardHeight) / 2;  // Décalage vertical pour centrer
-
-    // Ajouter les cartes
     for (let i = 0; i < cards.length; i++) {
+      // Vérification du chargement des images (exemple)
+      const images = cards[i].querySelectorAll("img");
+      await Promise.all(Array.from(images).map(img => {
+        return new Promise((resolve, reject) => {
+          if (img.complete) {
+            resolve();
+          } else {
+            img.onload = resolve;
+            img.onerror = reject;
+          }
+        });
+      }));
+
       const canvas = await html2canvas(cards[i], { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
 
-      const row = Math.floor(currentCardIndex / cardsPerRow);  // Ligne actuelle
-      const col = currentCardIndex % cardsPerRow;  // Colonne actuelle
+      const row = Math.floor(currentCardIndex / cardsPerRow);
+      const col = currentCardIndex % cardsPerRow;
 
-      // Calcul de la position horizontale (en fonction de l'offset)
-      const x = offsetX + col * (cardWidth + margin); 
-      // Calcul de la position verticale (en fonction de l'offset)
-      const y = offsetY + row * (cardHeight + margin); 
+      const x = margin + col * (cardWidth + margin);
+      const y = margin + row * (cardHeight + margin);
 
-      // Ajout de l'image de la carte sur le PDF
       pdf.addImage(imgData, "PNG", x, y, cardWidth, cardHeight);
       currentCardIndex++;
 
-      // Vérifier si la page est pleine, ajouter une nouvelle page si nécessaire
       if (currentCardIndex % cardsPerPage === 0 && currentCardIndex < cards.length) {
-        pdf.addPage();  // Ajouter une nouvelle page après 6 cartes
+        pdf.addPage();
       }
+
+      // Affichage de la progression (exemple)
+      console.log(`Carte ${currentCardIndex} / ${cards.length} ajoutée.`);
     }
 
-    // Sauvegarde du fichier PDF
     pdf.save("dobble_cards.pdf");
     alert("Le PDF a été téléchargé avec succès !");
   } catch (error) {
@@ -239,8 +241,6 @@ async function downloadCardsAsPDF() {
     alert("Une erreur est survenue lors du téléchargement du PDF. Veuillez réessayer.");
   }
 }
-
-
 // Fonction pour remplir le tableau des émojis personnalisables
 function populateEmojiTable() {
   const tableBody = document.getElementById("emojiTable").querySelector("tbody");
